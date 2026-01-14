@@ -611,6 +611,10 @@
           "named": true
         },
         {
+          "type": "content",
+          "named": true
+        },
+        {
           "type": "dict",
           "named": true
         },
@@ -1830,6 +1834,10 @@
           "named": true
         },
         {
+          "type": "content",
+          "named": true
+        },
+        {
           "type": "dict",
           "named": true
         },
@@ -2207,6 +2215,10 @@
   {
     "type": "call",
     "named": false
+  },
+  {
+    "type": "content",
+    "named": true
   },
   {
     "type": "elif",

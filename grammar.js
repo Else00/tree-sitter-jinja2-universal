@@ -14,7 +14,7 @@ module.exports = grammar({
           $.jinja_statement,
           $.jinja_comment,
           $.html_content,
-          $._text,
+          $.content,
         ),
       ),
 
@@ -159,7 +159,7 @@ module.exports = grammar({
             repeat(
               choice(
                 $.html_content,
-                $._text,
+                $.content,
                 $._jinja_value,
                 $.jinja_statement,
                 $.jinja_comment,
@@ -242,7 +242,7 @@ module.exports = grammar({
 
     kwarg: ($) => seq(field("key", $.identifier), "=", field("value", $._expr)),
 
-    _text: ($) =>
+    content: ($) =>
       token(prec(-1, new RegExp("(" + "[^<{]" + "|" + "[{][^{%#]" + ")+"))),
 
     integer: ($) => token(seq(optional(/[\+-]/), repeat1(/_?[0-9]+/))),

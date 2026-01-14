@@ -24,7 +24,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_text"
+            "name": "content"
           }
         ]
       }
@@ -762,7 +762,7 @@
                       },
                       {
                         "type": "SYMBOL",
-                        "name": "_text"
+                        "name": "content"
                       },
                       {
                         "type": "SYMBOL",
@@ -1293,7 +1293,7 @@
         }
       ]
     },
-    "_text": {
+    "content": {
       "type": "TOKEN",
       "content": {
         "type": "PREC",
