@@ -1,0 +1,10 @@
+{
+  "grammars": [
+    {
+      "name": "jinja2",
+      "scope": "source.jinja2",
+      "path": ".",
+      "file-types": ["jinja", "jinja2", "j2"]
+    }
+  ]
+}
