@@ -318,10 +318,6 @@
             "named": false
           },
           {
-            "type": "in",
-            "named": false
-          },
-          {
             "type": "not in",
             "named": false
           }
@@ -485,7 +481,7 @@
         "required": false,
         "types": [
           {
-            "type": "jinja_value_close",
+            "type": "jinja_expr_end",
             "named": true
           }
         ]
@@ -495,7 +491,7 @@
         "required": false,
         "types": [
           {
-            "type": "jinja_value_open",
+            "type": "jinja_expr_begin",
             "named": true
           }
         ]
@@ -578,7 +574,7 @@
         "required": false,
         "types": [
           {
-            "type": "jinja_value_close",
+            "type": "jinja_expr_end",
             "named": true
           }
         ]
@@ -588,7 +584,7 @@
         "required": false,
         "types": [
           {
-            "type": "jinja_value_open",
+            "type": "jinja_expr_begin",
             "named": true
           }
         ]
@@ -701,6 +697,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_block",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -775,6 +781,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_call",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -786,7 +802,7 @@
         "required": true,
         "types": [
           {
-            "type": "jinja_comment_close",
+            "type": "jinja_note_end",
             "named": true
           }
         ]
@@ -806,7 +822,7 @@
         "required": true,
         "types": [
           {
-            "type": "jinja_comment_open",
+            "type": "jinja_note_begin",
             "named": true
           }
         ]
@@ -875,12 +891,67 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_elif",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "jinja_else",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_else",
+          "named": true
+        }
+      ]
     }
   },
   {
     "type": "jinja_end_statement",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_endblock",
+          "named": true
+        },
+        {
+          "type": "kw_endcall",
+          "named": true
+        },
+        {
+          "type": "kw_endfor",
+          "named": true
+        },
+        {
+          "type": "kw_endif",
+          "named": true
+        },
+        {
+          "type": "kw_endmacro",
+          "named": true
+        },
+        {
+          "type": "kw_endraw",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "jinja_extends",
@@ -896,6 +967,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_extends",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -912,6 +993,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_filter",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -951,11 +1042,11 @@
             "named": true
           },
           {
-            "type": "if",
-            "named": false
+            "type": "integer",
+            "named": true
           },
           {
-            "type": "integer",
+            "type": "kw_if",
             "named": true
           },
           {
@@ -1096,6 +1187,20 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_for",
+          "named": true
+        },
+        {
+          "type": "kw_in",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1132,6 +1237,24 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_as",
+          "named": true
+        },
+        {
+          "type": "kw_from",
+          "named": true
+        },
+        {
+          "type": "kw_import",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1216,6 +1339,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_if",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1242,6 +1375,20 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_as",
+          "named": true
+        },
+        {
+          "type": "kw_import",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1268,6 +1415,20 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_include",
+          "named": true
+        },
+        {
+          "type": "kw_with",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1294,6 +1455,31 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_macro",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "jinja_raw",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_raw",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1368,6 +1554,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_set",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1379,7 +1575,7 @@
         "required": true,
         "types": [
           {
-            "type": "jinja_statement_close",
+            "type": "jinja_tag_end",
             "named": true
           }
         ]
@@ -1389,7 +1585,7 @@
         "required": true,
         "types": [
           {
-            "type": "jinja_statement_open",
+            "type": "jinja_tag_begin",
             "named": true
           }
         ]
@@ -1801,7 +1997,7 @@
         "required": false,
         "types": [
           {
-            "type": "jinja_value_close",
+            "type": "jinja_expr_end",
             "named": true
           }
         ]
@@ -1811,7 +2007,7 @@
         "required": false,
         "types": [
           {
-            "type": "jinja_value_open",
+            "type": "jinja_expr_begin",
             "named": true
           }
         ]
@@ -2205,87 +2401,15 @@
     "named": false
   },
   {
-    "type": "as",
-    "named": false
-  },
-  {
-    "type": "block",
-    "named": false
-  },
-  {
-    "type": "call",
-    "named": false
-  },
-  {
     "type": "content",
     "named": true
-  },
-  {
-    "type": "elif",
-    "named": false
-  },
-  {
-    "type": "endblock",
-    "named": false
-  },
-  {
-    "type": "endcall",
-    "named": false
-  },
-  {
-    "type": "endfor",
-    "named": false
-  },
-  {
-    "type": "endif",
-    "named": false
-  },
-  {
-    "type": "endmacro",
-    "named": false
-  },
-  {
-    "type": "endraw",
-    "named": false
-  },
-  {
-    "type": "extends",
-    "named": false
-  },
-  {
-    "type": "filter",
-    "named": false
   },
   {
     "type": "float",
     "named": true
   },
   {
-    "type": "for",
-    "named": false
-  },
-  {
-    "type": "from",
-    "named": false
-  },
-  {
-    "type": "if",
-    "named": false
-  },
-  {
     "type": "ignore missing",
-    "named": false
-  },
-  {
-    "type": "import",
-    "named": false
-  },
-  {
-    "type": "in",
-    "named": false
-  },
-  {
-    "type": "include",
     "named": false
   },
   {
@@ -2293,44 +2417,124 @@
     "named": true
   },
   {
-    "type": "jinja_comment_close",
-    "named": true
-  },
-  {
     "type": "jinja_comment_content",
     "named": true
   },
   {
-    "type": "jinja_comment_open",
+    "type": "jinja_expr_begin",
     "named": true
   },
   {
-    "type": "jinja_else",
+    "type": "jinja_expr_end",
     "named": true
   },
   {
-    "type": "jinja_raw",
+    "type": "jinja_note_begin",
     "named": true
   },
   {
-    "type": "jinja_statement_close",
+    "type": "jinja_note_end",
     "named": true
   },
   {
-    "type": "jinja_statement_open",
+    "type": "jinja_tag_begin",
     "named": true
   },
   {
-    "type": "jinja_value_close",
+    "type": "jinja_tag_end",
     "named": true
   },
   {
-    "type": "jinja_value_open",
+    "type": "kw_as",
     "named": true
   },
   {
-    "type": "macro",
-    "named": false
+    "type": "kw_block",
+    "named": true
+  },
+  {
+    "type": "kw_call",
+    "named": true
+  },
+  {
+    "type": "kw_elif",
+    "named": true
+  },
+  {
+    "type": "kw_else",
+    "named": true
+  },
+  {
+    "type": "kw_endblock",
+    "named": true
+  },
+  {
+    "type": "kw_endcall",
+    "named": true
+  },
+  {
+    "type": "kw_endfor",
+    "named": true
+  },
+  {
+    "type": "kw_endif",
+    "named": true
+  },
+  {
+    "type": "kw_endmacro",
+    "named": true
+  },
+  {
+    "type": "kw_endraw",
+    "named": true
+  },
+  {
+    "type": "kw_extends",
+    "named": true
+  },
+  {
+    "type": "kw_filter",
+    "named": true
+  },
+  {
+    "type": "kw_for",
+    "named": true
+  },
+  {
+    "type": "kw_from",
+    "named": true
+  },
+  {
+    "type": "kw_if",
+    "named": true
+  },
+  {
+    "type": "kw_import",
+    "named": true
+  },
+  {
+    "type": "kw_in",
+    "named": true
+  },
+  {
+    "type": "kw_include",
+    "named": true
+  },
+  {
+    "type": "kw_macro",
+    "named": true
+  },
+  {
+    "type": "kw_raw",
+    "named": true
+  },
+  {
+    "type": "kw_set",
+    "named": true
+  },
+  {
+    "type": "kw_with",
+    "named": true
   },
   {
     "type": "not",
@@ -2338,14 +2542,6 @@
   },
   {
     "type": "not in",
-    "named": false
-  },
-  {
-    "type": "set",
-    "named": false
-  },
-  {
-    "type": "with",
     "named": false
   },
   {

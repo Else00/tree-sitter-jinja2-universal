@@ -20,17 +20,18 @@ module.exports = grammar({
 
     _jinja_value: ($) =>
       seq(
-        field("open_delimiter", $.jinja_value_open),
+        field("open_delimiter", $.jinja_expr_begin),
         $._expr,
-        field("close_delimiter", $.jinja_value_close),
+        field("close_delimiter", $.jinja_expr_end),
       ),
 
-    jinja_value_open: ($) => "{{",
-    jinja_value_close: ($) => "}}",
+    // Renamed from jinja_value_open/close to avoid Zed's built-in handling
+    jinja_expr_begin: ($) => "{{",
+    jinja_expr_end: ($) => "}}",
 
     jinja_statement: ($) =>
       seq(
-        field("open_delimiter", $.jinja_statement_open),
+        field("open_delimiter", $.jinja_tag_begin),
         optional("-"),
         choice(
           $.jinja_for,
@@ -48,52 +49,78 @@ module.exports = grammar({
           $.jinja_end_statement,
         ),
         optional("-"),
-        field("close_delimiter", $.jinja_statement_close),
+        field("close_delimiter", $.jinja_tag_end),
       ),
 
-    jinja_statement_open: ($) => "{%",
-    jinja_statement_close: ($) => "%}",
+    // Renamed from jinja_statement_open/close to avoid Zed's built-in handling
+    jinja_tag_begin: ($) => "{%",
+    jinja_tag_end: ($) => "%}",
+
+    // Keywords as named nodes instead of anonymous literals
+    kw_for: ($) => "for",
+    kw_in: ($) => "in",
+    kw_if: ($) => "if",
+    kw_elif: ($) => "elif",
+    kw_else: ($) => "else",
+    kw_endif: ($) => "endif",
+    kw_endfor: ($) => "endfor",
+    kw_block: ($) => "block",
+    kw_endblock: ($) => "endblock",
+    kw_extends: ($) => "extends",
+    kw_include: ($) => "include",
+    kw_import: ($) => "import",
+    kw_from: ($) => "from",
+    kw_as: ($) => "as",
+    kw_set: ($) => "set",
+    kw_macro: ($) => "macro",
+    kw_endmacro: ($) => "endmacro",
+    kw_call: ($) => "call",
+    kw_endcall: ($) => "endcall",
+    kw_filter: ($) => "filter",
+    kw_raw: ($) => "raw",
+    kw_endraw: ($) => "endraw",
+    kw_with: ($) => "with",
 
     jinja_for: ($) =>
       seq(
-        "for",
+        $.kw_for,
         field("target", $._expr),
-        "in",
+        $.kw_in,
         field("iterable", $._expr),
-        optional(field("if_clause", seq("if", $._expr))),
+        optional(field("if_clause", seq($.kw_if, $._expr))),
       ),
 
     jinja_if: ($) =>
       seq(
-        "if",
+        $.kw_if,
         field("condition", $._expr),
         repeat(field("elif", $.jinja_elif)),
         optional(field("else", $.jinja_else)),
       ),
 
-    jinja_elif: ($) => seq("elif", field("condition", $._expr)),
+    jinja_elif: ($) => seq($.kw_elif, field("condition", $._expr)),
 
-    jinja_else: ($) => "else",
+    jinja_else: ($) => $.kw_else,
 
     jinja_include: ($) =>
       seq(
-        "include",
+        $.kw_include,
         field("template", $.lit_string),
-        optional(seq("with", field("context", $.dict))),
+        optional(seq($.kw_with, field("context", $.dict))),
         optional("ignore missing"),
       ),
 
     jinja_extends: ($) =>
-      seq("extends", field("parent_template", $.lit_string)),
+      seq($.kw_extends, field("parent_template", $.lit_string)),
 
-    jinja_block: ($) => seq("block", field("block_name", $.identifier)),
+    jinja_block: ($) => seq($.kw_block, field("block_name", $.identifier)),
 
     jinja_set: ($) =>
-      seq("set", field("variable", $.identifier), "=", field("value", $._expr)),
+      seq($.kw_set, field("variable", $.identifier), "=", field("value", $._expr)),
 
     jinja_macro: ($) =>
       seq(
-        "macro",
+        $.kw_macro,
         field("macro_name", $.identifier),
         field("params", $.argument_list),
       ),
@@ -102,50 +129,51 @@ module.exports = grammar({
       prec.right(
         2,
         seq(
-          "call",
+          $.kw_call,
           optional(field("macro", $._expr)),
           optional(field("params", $.argument_list)),
         ),
       ),
 
-    jinja_filter: ($) => seq("filter", field("filter_name", $.identifier)),
+    jinja_filter: ($) => seq($.kw_filter, field("filter_name", $.identifier)),
 
-    jinja_raw: ($) => "raw",
+    jinja_raw: ($) => $.kw_raw,
 
     jinja_import: ($) =>
       seq(
-        "import",
+        $.kw_import,
         field("module", $.lit_string),
-        "as",
+        $.kw_as,
         field("alias", $.identifier),
       ),
 
     jinja_from: ($) =>
       seq(
-        "from",
+        $.kw_from,
         field("module", $.lit_string),
-        "import",
+        $.kw_import,
         commaSep1(
           seq(
             field("name", $.identifier),
-            optional(seq("as", field("alias", $.identifier))),
+            optional(seq($.kw_as, field("alias", $.identifier))),
           ),
         ),
       ),
 
     jinja_end_statement: ($) =>
-      choice("endmacro", "endfor", "endif", "endblock", "endraw", "endcall"),
+      choice($.kw_endmacro, $.kw_endfor, $.kw_endif, $.kw_endblock, $.kw_endraw, $.kw_endcall),
 
     jinja_comment: ($) =>
       seq(
-        field("open_delimiter", $.jinja_comment_open),
+        field("open_delimiter", $.jinja_note_begin),
         field("content", $.jinja_comment_content),
-        field("close_delimiter", $.jinja_comment_close),
+        field("close_delimiter", $.jinja_note_end),
       ),
 
-    jinja_comment_open: ($) => "{#",
+    // Renamed from jinja_comment_open/close
+    jinja_note_begin: ($) => "{#",
     jinja_comment_content: ($) => token(prec(1, /([^#]|#[^}])*/)),
-    jinja_comment_close: ($) => "#}",
+    jinja_note_end: ($) => "#}",
 
     html_content: ($) =>
       seq(
@@ -280,7 +308,7 @@ module.exports = grammar({
           field("left", $._expr),
           field(
             "operator",
-            choice("==", "!=", "<", ">", "<=", ">=", "in", "not in"),
+            choice("==", "!=", "<", ">", "<=", ">=", "not in"),
           ),
           field("right", $._expr),
         ),
