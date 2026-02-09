@@ -57,8 +57,8 @@ module.exports = grammar({
     jinja_tag_end: ($) => "%}",
 
     // Keywords as named nodes instead of anonymous literals
+    // NOTE: kw_in removed - "in" is kept as anonymous literal in jinja_for context only
     kw_for: ($) => "for",
-    kw_in: ($) => "in",
     kw_if: ($) => "if",
     kw_elif: ($) => "elif",
     kw_else: ($) => "else",
@@ -85,7 +85,7 @@ module.exports = grammar({
       seq(
         $.kw_for,
         field("target", $._expr),
-        $.kw_in,
+        "in",  // Keep as anonymous literal to avoid matching inside identifiers
         field("iterable", $._expr),
         optional(field("if_clause", seq($.kw_if, $._expr))),
       ),

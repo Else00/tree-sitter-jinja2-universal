@@ -176,10 +176,6 @@
       "type": "STRING",
       "value": "for"
     },
-    "kw_in": {
-      "type": "STRING",
-      "value": "in"
-    },
     "kw_if": {
       "type": "STRING",
       "value": "if"
@@ -280,8 +276,8 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "kw_in"
+          "type": "STRING",
+          "value": "in"
         },
         {
           "type": "FIELD",

@@ -23,28 +23,28 @@ enum {
   sym_jinja_tag_begin = 4,
   sym_jinja_tag_end = 5,
   sym_kw_for = 6,
-  sym_kw_in = 7,
-  sym_kw_if = 8,
-  sym_kw_elif = 9,
-  sym_kw_else = 10,
-  sym_kw_endif = 11,
-  sym_kw_endfor = 12,
-  sym_kw_block = 13,
-  sym_kw_endblock = 14,
-  sym_kw_extends = 15,
-  sym_kw_include = 16,
-  sym_kw_import = 17,
-  sym_kw_from = 18,
-  sym_kw_as = 19,
-  sym_kw_set = 20,
-  sym_kw_macro = 21,
-  sym_kw_endmacro = 22,
-  sym_kw_call = 23,
-  sym_kw_endcall = 24,
-  sym_kw_filter = 25,
-  sym_kw_raw = 26,
-  sym_kw_endraw = 27,
-  sym_kw_with = 28,
+  sym_kw_if = 7,
+  sym_kw_elif = 8,
+  sym_kw_else = 9,
+  sym_kw_endif = 10,
+  sym_kw_endfor = 11,
+  sym_kw_block = 12,
+  sym_kw_endblock = 13,
+  sym_kw_extends = 14,
+  sym_kw_include = 15,
+  sym_kw_import = 16,
+  sym_kw_from = 17,
+  sym_kw_as = 18,
+  sym_kw_set = 19,
+  sym_kw_macro = 20,
+  sym_kw_endmacro = 21,
+  sym_kw_call = 22,
+  sym_kw_endcall = 23,
+  sym_kw_filter = 24,
+  sym_kw_raw = 25,
+  sym_kw_endraw = 26,
+  sym_kw_with = 27,
+  anon_sym_in = 28,
   anon_sym_ignoremissing = 29,
   anon_sym_EQ = 30,
   anon_sym_COMMA = 31,
@@ -142,7 +142,6 @@ static const char * const ts_symbol_names[] = {
   [sym_jinja_tag_begin] = "jinja_tag_begin",
   [sym_jinja_tag_end] = "jinja_tag_end",
   [sym_kw_for] = "kw_for",
-  [sym_kw_in] = "kw_in",
   [sym_kw_if] = "kw_if",
   [sym_kw_elif] = "kw_elif",
   [sym_kw_else] = "kw_else",
@@ -164,6 +163,7 @@ static const char * const ts_symbol_names[] = {
   [sym_kw_raw] = "kw_raw",
   [sym_kw_endraw] = "kw_endraw",
   [sym_kw_with] = "kw_with",
+  [anon_sym_in] = "in",
   [anon_sym_ignoremissing] = "ignore missing",
   [anon_sym_EQ] = "=",
   [anon_sym_COMMA] = ",",
@@ -261,7 +261,6 @@ static const TSSymbol ts_symbol_map[] = {
   [sym_jinja_tag_begin] = sym_jinja_tag_begin,
   [sym_jinja_tag_end] = sym_jinja_tag_end,
   [sym_kw_for] = sym_kw_for,
-  [sym_kw_in] = sym_kw_in,
   [sym_kw_if] = sym_kw_if,
   [sym_kw_elif] = sym_kw_elif,
   [sym_kw_else] = sym_kw_else,
@@ -283,6 +282,7 @@ static const TSSymbol ts_symbol_map[] = {
   [sym_kw_raw] = sym_kw_raw,
   [sym_kw_endraw] = sym_kw_endraw,
   [sym_kw_with] = sym_kw_with,
+  [anon_sym_in] = anon_sym_in,
   [anon_sym_ignoremissing] = anon_sym_ignoremissing,
   [anon_sym_EQ] = anon_sym_EQ,
   [anon_sym_COMMA] = anon_sym_COMMA,
@@ -401,10 +401,6 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = true,
   },
-  [sym_kw_in] = {
-    .visible = true,
-    .named = true,
-  },
   [sym_kw_if] = {
     .visible = true,
     .named = true,
@@ -488,6 +484,10 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
   [sym_kw_with] = {
     .visible = true,
     .named = true,
+  },
+  [anon_sym_in] = {
+    .visible = true,
+    .named = false,
   },
   [anon_sym_ignoremissing] = {
     .visible = true,
@@ -1611,7 +1611,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'e') ADVANCE(176);
       END_STATE();
     case 30:
-      if (lookahead == 'e') ADVANCE(126);
+      if (lookahead == 'e') ADVANCE(125);
       END_STATE();
     case 31:
       if (lookahead == 'e') ADVANCE(178);
@@ -1620,7 +1620,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'e') ADVANCE(1);
       END_STATE();
     case 33:
-      if (lookahead == 'e') ADVANCE(132);
+      if (lookahead == 'e') ADVANCE(131);
       END_STATE();
     case 34:
       if (lookahead == 'e') ADVANCE(66);
@@ -1632,28 +1632,28 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'e') ADVANCE(82);
       END_STATE();
     case 37:
-      if (lookahead == 'f') ADVANCE(124);
+      if (lookahead == 'f') ADVANCE(123);
       if (lookahead == 'g') ADVANCE(67);
       if (lookahead == 'm') ADVANCE(78);
-      if (lookahead == 'n') ADVANCE(123);
+      if (lookahead == 'n') ADVANCE(144);
       END_STATE();
     case 38:
-      if (lookahead == 'f') ADVANCE(124);
+      if (lookahead == 'f') ADVANCE(123);
       if (lookahead == 'g') ADVANCE(67);
       if (lookahead == 'm') ADVANCE(78);
       if (lookahead == 'n') ADVANCE(24);
       END_STATE();
     case 39:
-      if (lookahead == 'f') ADVANCE(125);
+      if (lookahead == 'f') ADVANCE(124);
       END_STATE();
     case 40:
-      if (lookahead == 'f') ADVANCE(127);
+      if (lookahead == 'f') ADVANCE(126);
       END_STATE();
     case 41:
       if (lookahead == 'g') ADVANCE(145);
       END_STATE();
     case 42:
-      if (lookahead == 'h') ADVANCE(144);
+      if (lookahead == 'h') ADVANCE(143);
       END_STATE();
     case 43:
       if (lookahead == 'i') ADVANCE(39);
@@ -1677,10 +1677,10 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'i') ADVANCE(65);
       END_STATE();
     case 49:
-      if (lookahead == 'k') ADVANCE(129);
+      if (lookahead == 'k') ADVANCE(128);
       END_STATE();
     case 50:
-      if (lookahead == 'k') ADVANCE(130);
+      if (lookahead == 'k') ADVANCE(129);
       END_STATE();
     case 51:
       if (lookahead == 'l') ADVANCE(43);
@@ -1691,10 +1691,10 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'x') ADVANCE(97);
       END_STATE();
     case 53:
-      if (lookahead == 'l') ADVANCE(139);
+      if (lookahead == 'l') ADVANCE(138);
       END_STATE();
     case 54:
-      if (lookahead == 'l') ADVANCE(140);
+      if (lookahead == 'l') ADVANCE(139);
       END_STATE();
     case 55:
       if (lookahead == 'l') ADVANCE(91);
@@ -1718,7 +1718,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'l') ADVANCE(73);
       END_STATE();
     case 62:
-      if (lookahead == 'm') ADVANCE(134);
+      if (lookahead == 'm') ADVANCE(133);
       END_STATE();
     case 63:
       if (lookahead == 'm') ADVANCE(45);
@@ -1739,10 +1739,10 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'o') ADVANCE(62);
       END_STATE();
     case 69:
-      if (lookahead == 'o') ADVANCE(137);
+      if (lookahead == 'o') ADVANCE(136);
       END_STATE();
     case 70:
-      if (lookahead == 'o') ADVANCE(138);
+      if (lookahead == 'o') ADVANCE(137);
       END_STATE();
     case 71:
       if (lookahead == 'o') ADVANCE(92);
@@ -1775,10 +1775,10 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'r') ADVANCE(122);
       END_STATE();
     case 81:
-      if (lookahead == 'r') ADVANCE(128);
+      if (lookahead == 'r') ADVANCE(127);
       END_STATE();
     case 82:
-      if (lookahead == 'r') ADVANCE(141);
+      if (lookahead == 'r') ADVANCE(140);
       END_STATE();
     case 83:
       if (lookahead == 'r') ADVANCE(95);
@@ -1793,10 +1793,10 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'r') ADVANCE(70);
       END_STATE();
     case 87:
-      if (lookahead == 's') ADVANCE(135);
+      if (lookahead == 's') ADVANCE(134);
       END_STATE();
     case 88:
-      if (lookahead == 's') ADVANCE(131);
+      if (lookahead == 's') ADVANCE(130);
       END_STATE();
     case 89:
       if (lookahead == 's') ADVANCE(44);
@@ -1811,13 +1811,13 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 't') ADVANCE(219);
       END_STATE();
     case 93:
-      if (lookahead == 't') ADVANCE(136);
+      if (lookahead == 't') ADVANCE(135);
       END_STATE();
     case 94:
       if (lookahead == 't') ADVANCE(42);
       END_STATE();
     case 95:
-      if (lookahead == 't') ADVANCE(133);
+      if (lookahead == 't') ADVANCE(132);
       END_STATE();
     case 96:
       if (lookahead == 't') ADVANCE(2);
@@ -1835,10 +1835,10 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'u') ADVANCE(28);
       END_STATE();
     case 101:
-      if (lookahead == 'w') ADVANCE(142);
+      if (lookahead == 'w') ADVANCE(141);
       END_STATE();
     case 102:
-      if (lookahead == 'w') ADVANCE(143);
+      if (lookahead == 'w') ADVANCE(142);
       END_STATE();
     case 103:
       if (lookahead == '{') ADVANCE(116);
@@ -1923,70 +1923,70 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       ACCEPT_TOKEN(sym_kw_for);
       END_STATE();
     case 123:
-      ACCEPT_TOKEN(sym_kw_in);
-      END_STATE();
-    case 124:
       ACCEPT_TOKEN(sym_kw_if);
       END_STATE();
-    case 125:
+    case 124:
       ACCEPT_TOKEN(sym_kw_elif);
       END_STATE();
-    case 126:
+    case 125:
       ACCEPT_TOKEN(sym_kw_else);
       END_STATE();
-    case 127:
+    case 126:
       ACCEPT_TOKEN(sym_kw_endif);
       END_STATE();
-    case 128:
+    case 127:
       ACCEPT_TOKEN(sym_kw_endfor);
       END_STATE();
-    case 129:
+    case 128:
       ACCEPT_TOKEN(sym_kw_block);
       END_STATE();
-    case 130:
+    case 129:
       ACCEPT_TOKEN(sym_kw_endblock);
       END_STATE();
-    case 131:
+    case 130:
       ACCEPT_TOKEN(sym_kw_extends);
       END_STATE();
-    case 132:
+    case 131:
       ACCEPT_TOKEN(sym_kw_include);
       END_STATE();
-    case 133:
+    case 132:
       ACCEPT_TOKEN(sym_kw_import);
       END_STATE();
-    case 134:
+    case 133:
       ACCEPT_TOKEN(sym_kw_from);
       END_STATE();
-    case 135:
+    case 134:
       ACCEPT_TOKEN(sym_kw_as);
       END_STATE();
-    case 136:
+    case 135:
       ACCEPT_TOKEN(sym_kw_set);
       END_STATE();
-    case 137:
+    case 136:
       ACCEPT_TOKEN(sym_kw_macro);
       END_STATE();
-    case 138:
+    case 137:
       ACCEPT_TOKEN(sym_kw_endmacro);
       END_STATE();
-    case 139:
+    case 138:
       ACCEPT_TOKEN(sym_kw_call);
       END_STATE();
-    case 140:
+    case 139:
       ACCEPT_TOKEN(sym_kw_endcall);
       END_STATE();
-    case 141:
+    case 140:
       ACCEPT_TOKEN(sym_kw_filter);
       END_STATE();
-    case 142:
+    case 141:
       ACCEPT_TOKEN(sym_kw_raw);
       END_STATE();
-    case 143:
+    case 142:
       ACCEPT_TOKEN(sym_kw_endraw);
       END_STATE();
-    case 144:
+    case 143:
       ACCEPT_TOKEN(sym_kw_with);
+      END_STATE();
+    case 144:
+      ACCEPT_TOKEN(anon_sym_in);
       END_STATE();
     case 145:
       ACCEPT_TOKEN(anon_sym_ignoremissing);
@@ -2661,7 +2661,6 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [sym_jinja_tag_begin] = ACTIONS(1),
     [sym_jinja_tag_end] = ACTIONS(1),
     [sym_kw_for] = ACTIONS(1),
-    [sym_kw_in] = ACTIONS(1),
     [sym_kw_if] = ACTIONS(1),
     [sym_kw_elif] = ACTIONS(1),
     [sym_kw_else] = ACTIONS(1),
@@ -2682,6 +2681,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [sym_kw_raw] = ACTIONS(1),
     [sym_kw_endraw] = ACTIONS(1),
     [sym_kw_with] = ACTIONS(1),
+    [anon_sym_in] = ACTIONS(1),
     [anon_sym_ignoremissing] = ACTIONS(1),
     [anon_sym_EQ] = ACTIONS(1),
     [anon_sym_COMMA] = ACTIONS(1),
@@ -2887,13 +2887,13 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
       sym_kw_import,
       sym_kw_as,
       sym_kw_with,
+      anon_sym_in,
       anon_sym_ignoremissing,
       anon_sym_COMMA,
       anon_sym_DOT,
@@ -2968,11 +2968,11 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
       sym_kw_as,
+      anon_sym_in,
       anon_sym_COMMA,
       anon_sym_DOT,
       anon_sym_LBRACK,
@@ -3005,10 +3005,10 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
+      anon_sym_in,
       anon_sym_COMMA,
       anon_sym_RBRACK,
       anon_sym_LPAREN,
@@ -3039,10 +3039,10 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
+      anon_sym_in,
       anon_sym_COMMA,
       anon_sym_RBRACK,
       anon_sym_LPAREN,
@@ -3067,10 +3067,10 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
+      anon_sym_in,
       anon_sym_ignoremissing,
       anon_sym_COMMA,
       anon_sym_DOT,
@@ -3098,10 +3098,10 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
+      anon_sym_in,
       anon_sym_ignoremissing,
       anon_sym_COMMA,
       anon_sym_DOT,
@@ -3129,10 +3129,10 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
+      anon_sym_in,
       anon_sym_ignoremissing,
       anon_sym_COMMA,
       anon_sym_DOT,
@@ -3160,10 +3160,10 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
+      anon_sym_in,
       anon_sym_ignoremissing,
       anon_sym_COMMA,
       anon_sym_DOT,
@@ -3197,10 +3197,10 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
+      anon_sym_in,
       anon_sym_COMMA,
       anon_sym_RBRACK,
       anon_sym_LPAREN,
@@ -3225,10 +3225,10 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
+      anon_sym_in,
       anon_sym_COMMA,
       anon_sym_DOT,
       anon_sym_LBRACK,
@@ -3296,10 +3296,10 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
+      anon_sym_in,
       anon_sym_COMMA,
       anon_sym_DOT,
       anon_sym_LBRACK,
@@ -3326,10 +3326,10 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
+      anon_sym_in,
       anon_sym_COMMA,
       anon_sym_DOT,
       anon_sym_LBRACK,
@@ -3356,10 +3356,10 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
+      anon_sym_in,
       anon_sym_COMMA,
       anon_sym_DOT,
       anon_sym_LBRACK,
@@ -3386,10 +3386,10 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
+      anon_sym_in,
       anon_sym_COMMA,
       anon_sym_DOT,
       anon_sym_LBRACK,
@@ -3416,10 +3416,10 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
+      anon_sym_in,
       anon_sym_COMMA,
       anon_sym_DOT,
       anon_sym_LBRACK,
@@ -3487,10 +3487,10 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
+      anon_sym_in,
       anon_sym_COMMA,
       anon_sym_DOT,
       anon_sym_LBRACK,
@@ -3517,10 +3517,10 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
+      anon_sym_in,
       anon_sym_COMMA,
       anon_sym_DOT,
       anon_sym_LBRACK,
@@ -3547,10 +3547,10 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
+      anon_sym_in,
       anon_sym_COMMA,
       anon_sym_DOT,
       anon_sym_LBRACK,
@@ -3618,10 +3618,10 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
+      anon_sym_in,
       anon_sym_COMMA,
       anon_sym_DOT,
       anon_sym_LBRACK,
@@ -3648,10 +3648,10 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
+      anon_sym_in,
       anon_sym_COMMA,
       anon_sym_DOT,
       anon_sym_LBRACK,
@@ -3762,10 +3762,10 @@ static const uint16_t ts_small_parse_table[] = {
       sym_jinja_expr_end,
       anon_sym_DASH,
       sym_jinja_tag_end,
-      sym_kw_in,
       sym_kw_if,
       sym_kw_elif,
       sym_kw_else,
+      anon_sym_in,
       anon_sym_COMMA,
       anon_sym_DOT,
       anon_sym_LBRACK,
@@ -5962,7 +5962,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(149), 1,
       anon_sym_LPAREN,
     ACTIONS(399), 1,
-      sym_kw_in,
+      anon_sym_in,
     STATE(24), 1,
       sym_argument_list,
     ACTIONS(281), 2,

@@ -1189,15 +1189,11 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
           "type": "kw_for",
-          "named": true
-        },
-        {
-          "type": "kw_in",
           "named": true
         }
       ]
@@ -2413,6 +2409,10 @@
     "named": false
   },
   {
+    "type": "in",
+    "named": false
+  },
+  {
     "type": "integer",
     "named": true
   },
@@ -2510,10 +2510,6 @@
   },
   {
     "type": "kw_import",
-    "named": true
-  },
-  {
-    "type": "kw_in",
     "named": true
   },
   {
